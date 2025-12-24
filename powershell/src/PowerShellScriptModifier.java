@@ -25,7 +25,7 @@ import java.util.UUID;
  * @see #main(String[]) for the entry point
  * @see #generateName() for unique file name generation
  */
-public class powershellScriptModifier {
+public class PowerShellScriptModifier {
 
     /**
      * @param args the command line arguments
@@ -53,6 +53,7 @@ public class powershellScriptModifier {
         Path outPath= Path.of("output/sample.ps1");
         try {
             Files.write(outPath, Files.lines(inputPath)
+                .parallel()                
                 .map(word -> word.replaceAll("Invoke-WebRequest", "Invoke-WebRequest -OutFile " + generateName())) 
                 .toList());
         } catch (IOException e) {
